@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Code verification {% endblock title %}
+
+{% block content1 %}
+
+<h3 style="margin-top: 20px;"> {{ page_name }} </h3>
+<br/>
+    <form method="POST">
+        {{ form.code.label }}
+        {{ form.code(class_="form-control", placeholder="Enter the given code")}}
+
+        <br>
+        {{ form.submit(class_="btn btn-primary") }}
+        {{form.hidden_tag()}}
+    </form>
+
+{% endblock content1 %}

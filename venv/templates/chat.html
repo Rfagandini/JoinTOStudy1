@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Chat {{room_chat}}{% endblock title %}
+
+{% block content1 %}
+
+<head>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var socket;
+            $(document).ready(function(){
+                socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+                socket.on('connect', function() {
+                    socket.emit('join', {});
+                });
+                socket.on('status', function(data) {
+                    $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                });
+                socket.on('message', function(data) {
+                    $('#chat').val($('#chat').val() + data.msg + '\n');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                });
+                $('#send').click(function(e) {
+                        text = $('#text').val();
+                        $('#text').val('');
+                        socket.emit('text', {msg: text});
+                });
+            });
+            function leave_room() {
+                socket.emit('left', {}, function() {
+                    socket.disconnect();
+                    // go back to the login page
+                    window.location.href = "{{'/'}}";
+                });
+            }
+        </script>
+
+
+</head>
+
+<h3 style="margin-top: 20px;">{{page_name}}</h3>
+
+<body class="text-center">
+    <p> Welcome to the chat room, you will be able to talk to other users!  </p>
+    <div class="chatwindow">
+        <h3>{{room_chat.capitalize()}}'s room chat</h3>
+        <textarea id="chat" cols="70" rows="10" placeholder="No messages  yet. Start one..."></textarea><br><br>
+        <input type="text" id="text" size="60" placeholder="Enter your message here">
+        <button type="button" id="send" class="btn btn-success">Send</button><br><br>
+        <center> <button type="button" class="btn btn-danger" onclick="leave_room()">Leave the chat</button> </center>
+    </div>
+</body>
+{% endblock content1 %}

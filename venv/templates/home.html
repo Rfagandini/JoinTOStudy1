@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Home page{% endblock title %}
+{% block content2 %}
+
+<style>
+    .carousel-item{
+        height: 46em;
+        color: white;
+        position: relative;
+
+    }
+
+    .container{
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: 1rem;
+        /*padding-bottom: 50px;*/
+    }
+
+    .overlay-image{
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 60em;
+    }
+
+
+
+</style>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"> </li>
+
+
+    </ol>
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+
+            <div class="overlay-image" style="background-image:url(../static/multiethnic-group-of-young-studenttry1.jpg);"></div>
+
+            <div class="col-md-6" style="margin-top: 5em; left: 25%; right: 25%;">
+
+                <div class="box" style="color: white; width: 100%; height: auto; background-color: rgba(64,64,64,0.5); padding-bottom: 2em; padding-top: 2em; margin-bottom: 2em;" >
+
+                    <div class="video" style="margin-left: 4em; margin-bottom: 0.5em; width: 80%; height: auto; position: relative;">
+
+                        <h2 style="display: inline;">Find your favorite study place right here!</h2>
+
+                        <div class="container" style="display: inline;" >
+                            {% if not user:  %}
+                                <a href="sign_up" class="btn btn-lg btn-primary">Sign up!</a>
+                            {% else: %}
+                                <a href="information" class="btn btn-lg btn-primary">Let's book!</a>
+                            {% endif %}
+                        </div>
+
+                        <iframe style="margin-top: 0.5em; margin-bottom: 1em;position: relative; width: 100%; height: 20em; display: block;"
+                        src="https://www.youtube.com/embed/WOzXtxCzaZg?rel=0;&autoplay=1" allowfullscreen>
+                        </iframe>
+
+                        <p class="col-md-8 fs-4"> Welcome to JoinTOStudy webpage. We are a new app. providing an innovative and efficient mechanism to satisfy your study necessities</p>
+                        <span class="col-md-8 fs-4"> Now studying places are no longer a problem!  </span>
+
+
+
+                    </div>
+
+                </div>
+
+        </div>
+
+
+
+        </div>
+
+        <div class="carousel-item">
+            <div class="overlay-image" style="background-image:url(../static/students_group_2cover.jpg);"></div>
+
+            <div class="container" style="margin-top: 7em;">
+                <h2>Check the study rooms!</h2>
+
+                {% if not user:  %}
+                <a href="information" class="btn btn-lg btn-primary">Sign up!</a>
+                {% else: %}
+                <a href="sign_up" class="btn btn-lg btn-primary">Let's book!</a>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <a href="#myCarousel" class="carousel-control-prev" role="button" data-slide-to="prev">
+        <span class="sr-only"> Previous </span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a href="#myCarousel" class="carousel-control-next" role="button" data-slide-to="next">
+        <span class="sr-only"> Previous </span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+
+</div>
+
+
+
+{% endblock content2 %}

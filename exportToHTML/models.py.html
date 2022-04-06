@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>models.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+models.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">app </span><span class="s0">import </span><span class="s1">db</span>
+<span class="s0">from </span><span class="s1">flask_login </span><span class="s0">import </span><span class="s1">UserMixin</span>
+<span class="s0">from </span><span class="s1">sqlalchemy.sql </span><span class="s0">import </span><span class="s1">func</span><span class="s0">, </span><span class="s1">expression</span>
+
+
+<span class="s0">class </span><span class="s1">Recovery_code(db.Model):</span>
+    <span class="s1">__tablename__ = </span><span class="s2">&quot;recovery_code&quot;</span>
+    <span class="s1">id = db.Column(db.Integer</span><span class="s0">, </span><span class="s1">primary_key=</span><span class="s0">True</span><span class="s1">)</span>
+    <span class="s1">code = db.Column(db.String(</span><span class="s3">6</span><span class="s1">))</span>
+
+
+<span class="s0">class </span><span class="s1">Booking(db.Model):</span>
+    <span class="s1">__tablename__ = </span><span class="s2">&quot;booking&quot;</span>
+    <span class="s1">id = db.Column(db.Integer</span><span class="s0">, </span><span class="s1">primary_key=</span><span class="s0">True</span><span class="s1">)</span>
+    <span class="s1">name_StudyRoom = db.Column(db.String(</span><span class="s3">50</span><span class="s1">)</span><span class="s0">, </span><span class="s1">db.ForeignKey(</span><span class="s2">'room.name'</span><span class="s1">))</span>
+    <span class="s1">email_User = db.Column(db.String(</span><span class="s3">100</span><span class="s1">)</span><span class="s0">, </span><span class="s1">db.ForeignKey(</span><span class="s2">'user.email'</span><span class="s1">))</span>
+    <span class="s1">date = db.Column(db.DateTime(timezone=</span><span class="s0">True</span><span class="s1">)</span><span class="s0">, </span><span class="s1">default=func.now())</span>
+    <span class="s1">confirmed = db.Column(db.Boolean</span><span class="s0">, </span><span class="s1">default=</span><span class="s0">False, </span><span class="s1">nullable=</span><span class="s0">False</span><span class="s1">)</span>
+
+    <span class="s0">def </span><span class="s1">__init__(self</span><span class="s0">, </span><span class="s1">name_StudyRoom</span><span class="s0">, </span><span class="s1">email_User ):</span>
+        <span class="s1">self.name_StudyRoom = name_StudyRoom</span>
+        <span class="s1">self.email_User = email_User</span>
+        <span class="s1">self.confirmed = </span><span class="s0">False</span>
+
+    <span class="s0">def </span><span class="s1">not_confirmed(self):</span>
+
+        <span class="s1">self.confirmed = </span><span class="s0">False</span>
+
+    <span class="s0">def </span><span class="s1">yes_confirmed(self):</span>
+
+        <span class="s1">self.confirmed = </span><span class="s0">True</span>
+
+    <span class="s0">def </span><span class="s1">getconfirmed(self):</span>
+        <span class="s0">return </span><span class="s1">self.confirmed.__init__()</span>
+
+    <span class="s0">def </span><span class="s1">__str__(self):</span>
+
+        <span class="s0">return </span><span class="s2">&quot;Booking id: {self.id} - name_StudyRoom = {self.name_StudyRoom} - Date: {self.date}&quot;</span><span class="s1">.format(self=self)</span>
+
+
+<span class="s0">class </span><span class="s1">Room(db.Model):</span>
+    <span class="s1">__tablename__ = </span><span class="s2">&quot;room&quot;</span>
+    <span class="s1">id = db.Column(db.Integer</span><span class="s0">, </span><span class="s1">primary_key=</span><span class="s0">True</span><span class="s1">)</span>
+    <span class="s1">name = db.Column(db.String(</span><span class="s3">100</span><span class="s1">))</span>
+    <span class="s1">capacity = db.Column(db.Integer)</span>
+    <span class="s1">status = db.Column(db.Integer)</span>
+    <span class="s1">description = db.Column(db.String(</span><span class="s3">500</span><span class="s1">))</span>
+    <span class="s1">confirmation_code = db.Column(db.String(</span><span class="s3">10</span><span class="s1">))</span>
+    <span class="s1">requested_booking = db.relationship(</span><span class="s2">'Booking'</span><span class="s0">, </span><span class="s1">backref=</span><span class="s2">&quot;Room.id&quot;</span><span class="s1">)</span>
+    <span class="s1">internet = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">ac = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">socket = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">vending_machine = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">bathroom = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">heating_system = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">address = db.Column(db.String(</span><span class="s3">200</span><span class="s1">))</span>
+    <span class="s1">text_borrowing = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">copy_machine = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">Smartcard_services = db.Column(db.String(</span><span class="s3">5</span><span class="s1">))</span>
+    <span class="s1">Phone = db.Column(db.String(</span><span class="s3">30</span><span class="s1">))</span>
+    <span class="s1">Opening = db.Column(db.String(</span><span class="s3">300</span><span class="s1">))</span>
+    <span class="s1">nearby_places = db.Column(db.String(</span><span class="s3">2000</span><span class="s1">))</span>
+
+    <span class="s0">def </span><span class="s1">add_number_booking(self):</span>
+        <span class="s1">self.status = self.status + </span><span class="s3">1</span>
+
+    <span class="s0">def </span><span class="s1">decrease_number_booking(self):</span>
+        <span class="s1">self.status = self.status - </span><span class="s3">1</span>
+
+
+<span class="s0">class </span><span class="s1">User(db.Model</span><span class="s0">, </span><span class="s1">UserMixin):</span>
+    <span class="s1">__tablename__ = </span><span class="s2">&quot;user&quot;</span>
+    <span class="s1">id = db.Column(db.Integer</span><span class="s0">, </span><span class="s1">primary_key=</span><span class="s0">True</span><span class="s1">)</span>
+    <span class="s1">email = db.Column(db.String(</span><span class="s3">100</span><span class="s1">)</span><span class="s0">, </span><span class="s1">unique=</span><span class="s0">True</span><span class="s1">)</span>
+    <span class="s1">password = db.Column(db.BINARY(</span><span class="s3">60</span><span class="s1">)</span><span class="s0">, </span><span class="s1">nullable=</span><span class="s0">False</span><span class="s1">)</span>
+    <span class="s1">first_name = db.Column(db.String(</span><span class="s3">100</span><span class="s1">))</span>
+    <span class="s1">last_name = db.Column(db.String(</span><span class="s3">100</span><span class="s1">))</span>
+    <span class="s1">requested_booking = db.relationship(</span><span class="s2">'Booking'</span><span class="s0">, </span><span class="s1">backref=</span><span class="s2">&quot;User.id&quot;</span><span class="s1">)</span>
+    <span class="s1">counter_booking = db.Column(db.Integer)</span>
+
+    <span class="s0">def </span><span class="s1">one_more_booking(self):</span>
+
+        <span class="s1">self.counter_booking = self.counter_booking + </span><span class="s3">1</span>
+</pre>
+</body>
+</html>

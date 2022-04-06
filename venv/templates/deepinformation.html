@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %} {{room.name}} {% endblock title %}
+{% block content1 %}
+
+
+<div class="container py-4">
+
+    <div class=" bg-light rounded-3">
+      <div class="container-fluid p-3" align="center">
+        <h1 class="display-5 fw-bold" style="margin-bottom: 20px;">{{ room.name.capitalize() }}({{room.status}}/{{room.capacity}}) </h1> <img src="../static/{{room.name}}_study_room1.jpg" width="800" height="auto">
+
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5" style="color: white">
+           <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Amenity</th>
+        <th>Yes/No</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td> WiFi </td>
+            <td>{{ room.internet }}</td>
+        </tr>
+        <tr>
+            <td> Air conditioner </td>
+            <td> {{room.ac}} </td>
+        </tr>
+        <tr>
+            <td> Socket </td>
+            <td> {{room.socket }} </td>
+        </tr>
+        <tr>
+            <td> Vending machines </td>
+            <td> {{room.vending_machine}}</td>
+        </tr>
+        <tr>
+            <td> Bathrooms </td>
+            <td> {{room.bathroom}} </td>
+        </tr>
+        <tr>
+            <td> Copy machine </td>
+            <td> {{room.copy_machine}}</td>
+        </tr>
+        <tr>
+            <td> Text borrowing </td>
+            <td> {{room.text_borrowing}}</td>
+        </tr>
+         <tr>
+            <td> Smartcard services </td>
+            <td> {{room.Smartcard_services}}</td>
+        </tr>
+
+    </tbody>
+  </table>
+        </div>
+      </div>
+      <div class="col-md-6" align="left" style="margin-top: 20px;">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Description</h2>
+
+            <p class="col-md-8 fs-4">{{room.description}}</p>
+
+            {% if room.status < room.capacity %}
+                {% if active %}
+
+                <form action='/booking' method="post" style="display: inline-block">
+                    <input type="hidden" id="hidden" name="hidden" value="{{room.name}}">
+                    <input type="submit" class="btn btn-primary" value="Booking">
+
+                </form>
+
+                <form action='/chat' method="post" style="display: inline-block">
+                    <input type="hidden" id="hidden" name="hidden" value="{{room.name}}">
+                    <input type="submit" class="btn btn-primary" value="Chat room">
+                </form>
+                {% else %}
+
+                    <p>You must have an account for further booking</p>
+                    <a href="sign_up">Create your accout in here!</a>
+
+                {%endif%}
+
+            {% else %}
+                        <p>At the moment there are no free seats on this aula studio, come back later!</p>
+
+
+            {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class=" bg-light rounded-3">
+      <div class="container-fluid p-3">
+        <h1> Nearby places </h1>
+          <br>
+          {% for i in super_text %}
+          <p> {{i}} </p>
+          {% endfor %}
+
+      </div>
+    </div>
+
+
+
+<!--    <footer class="pt-3 mt-4 text-muted border-top">-->
+<!--      © 2022-->
+<!--    </footer>-->
+  </div>
+
+
+
+
+{% endblock content1 %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          crossorigin="anonymous"
+        />
+
+        <title>{% block title %}Home{% endblock %}</title>
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#524E4D; ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+             <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+
+                    <img src="../static/logo%20part1.png" width="3%">
+                    <a class="nav-item nav-link" id="home" href="/" style="color: whitesmoke;">Home</a>
+                    <a class="nav-item nav-link" id="information" href="/information" style="color: whitesmoke;">Information</a>
+
+                {% if session.get("active_user"): %}
+
+                      <a class="nav-item nav-link" id="logout" href="/logout" style="color: whitesmoke;">Logout</a>
+
+                      <a class="nav-item nav-link" id="personal" href="/personal" style="color: whitesmoke;">Account</a>
+                      <a class="nav-item nav-link" id="bookings" href="/bookings_list" style="color: whitesmoke;"> Bookings </a>
+                      <span style="color: white; text-align: left;   margin-top: 0.5rem; margin-left: 60%">You are logged in, {{ session.get("active_user_name") }}</span>
+
+                {% elif not session.get("active_user"): %}
+
+                      <a class="nav-item nav-link" id="login" href="/login" style="color: whitesmoke;">Login</a>
+                      <a class="nav-item nav-link" id="signUp" href="/sign_up" style="color: whitesmoke;">Sign Up</a>
+
+
+                {%endif%}
+
+                </div>
+             </div>
+
+        </nav>
+
+        <div class="container2">
+        {% block content2 %}
+            {% endblock %}
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category,message in messages %}
+                    {%if category == 'failure' %}
+                        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {%elif category == 'success' %}
+                         <div class="alert alert-success alter-dismissable fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="container" style="margin-bottom: 5%; padding-bottom: 1em; min-height: 100%;" >
+        {% block content1 %}
+            {% endblock %}
+
+        </div>
+
+
+        <footer style="position: fixed; bottom: 0; left: 0; right: 0; background:#524E4D; height: 9em; width: 100%; padding-top: 15px;  color: #fff; margin-top: 1em;" >
+            <div class="footer-content" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
+<!--                 <image href="../static/logo-orizzontale.png"></image>-->
+                <img src="../static/logo--orizzontale.png" width="17%">
+                <ul class="socials" style="list-style: none; display: flex; align-items: center; justify-content: center; margin: 0.5rem 0 3rem 0;">
+                    <li style="margin: 0 10px;"><a style="text-decoration: none; color: white" href="#"><i style="font-size: 1.1rem;" class="fa fa-facebook"></i></a> </li>
+                    <li style="margin: 0 10px;"><a style="text-decoration: none; color: white" href="#"><i style="font-size: 1.1rem;" class="fa fa-instagram"></i></a> </li>
+                    <li style="margin: 0 10px;"><a style="text-decoration: none; color: white" href="#"><i style="font-size: 1.1rem;" class="fa fa-youtube"></i></a> </li>
+                </ul>
+
+
+
+            </div>
+<!--            <div class="footer-bottom" style="background: black; width: 100%; padding: 10px 0; text-align: center;">-->
+<!--                <p style="font-size: 14px; word-spacing: 2px; text-transform: capitalize;">Copyright &copy;2022 BookTOStudy</p>-->
+
+<!--            </div>-->
+
+
+        </footer>
+
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"
+        ></script>
+
+        <script
+          type="text/javascript"
+          src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+
+    </body>
+</html>

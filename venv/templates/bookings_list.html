@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Booking{% endblock title %}
+
+{% block content1 %}
+
+<h3 style="margin-top: 20px;">{{page_name}}</h3>
+
+<p> Here you can find your previous and active bookings. </p>
+
+
+<table id="data" class="table table-striped" style="margin-top: 20px; margin-bottom: 10%;">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Study room</th>
+        <th>Confirmed? (Yes/No)</th>
+      </tr>
+    </thead>
+
+
+{% for each_booking in bookings: %}
+
+
+
+    {% if ((not each_booking.confirmed) and (not true_code)): %}
+    <form action='/booking' method="POST">
+    {% endif %}
+
+
+    <tbody>
+        <tr>
+
+            <td> {{each_booking.date}} </td>
+            <td> {{ each_booking.name_StudyRoom.capitalize() }}</td>
+            {% if each_booking.confirmed %}
+            <td> Yes </td>
+            {% else %}
+            <td> No </td>
+            {% endif %}
+
+        </tr>
+    </tbody>
+
+
+                {% if ((not each_booking.confirmed) and (not true_code)): %}
+                    <a href="/delete/{{ each_booking.id }}" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                    {{ form.inserted_code.label }}
+                    {{ form.inserted_code(class_="form-control", placeholder="Enter the code in here!") }}
+
+                    {{ form.submit(class_="btn btn-primary", style="margin-top: 10px;") }}
+
+
+
+                    {{form.hidden_tag()}}
+                {% endif %}
+
+    {% if ((not each_booking.confirmed) and (not true_code)): %}
+    </form>
+    {% endif %}
+
+{% endfor %}
+</table>
+
+{% endblock content1 %}

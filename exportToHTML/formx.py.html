@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>formx.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+formx.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">flask_wtf </span><span class="s0">import </span><span class="s1">FlaskForm</span>
+<span class="s0">from </span><span class="s1">wtforms </span><span class="s0">import </span><span class="s1">StringField</span><span class="s0">, </span><span class="s1">SubmitField</span><span class="s0">, </span><span class="s1">PasswordField</span><span class="s0">, </span><span class="s1">DateField</span>
+<span class="s0">from </span><span class="s1">wtforms.validators </span><span class="s0">import </span><span class="s1">DataRequired</span><span class="s0">, </span><span class="s1">Length</span><span class="s0">, </span><span class="s1">Regexp</span><span class="s0">, </span><span class="s1">EqualTo</span>
+
+
+<span class="s0">class </span><span class="s1">Registrationform(FlaskForm):</span>
+
+    <span class="s1">email = StringField(</span><span class="s2">&quot;Email:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">,</span>
+    <span class="s1">Length(min=</span><span class="s3">5</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">50</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">&quot;Email must contain at least 5 characters&quot;</span>
+                         <span class="s2">&quot; and not more than 50 characters', category='failure&quot;</span><span class="s1">)])</span>
+
+    <span class="s1">first_name = StringField(</span><span class="s2">&quot;First name:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">,</span>
+                 <span class="s1">Length(min=</span><span class="s3">2</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">30</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">' it</span><span class="s0">\'</span><span class="s2">s length must be between 2 and 30 characters'</span><span class="s1">)</span><span class="s0">,</span>
+                 <span class="s1">Regexp(</span><span class="s2">'^[a-zA-Z]+(?:\s[a-zA-Z]+)*$'</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">'The first name cannot contain whitespace at the beginning or end. It cannot contain digits or special characters'</span><span class="s1">)])</span>
+
+    <span class="s1">last_name = StringField(</span><span class="s2">&quot;Last name:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">,</span>
+                <span class="s1">Length(min=</span><span class="s3">2</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">30</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">' it</span><span class="s0">\'</span><span class="s2">s length must be between 2 and 30 characters'</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">Regexp(</span><span class="s2">'^[a-zA-Z]+(?:\s[a-zA-Z]+)*$'</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">'The last name cannot contain whitespace at the beginning or end. It cannot contain digits or special characters'</span><span class="s1">)])</span>
+
+    <span class="s1">password = PasswordField(</span><span class="s2">&quot;Password:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">,</span>
+               <span class="s1">Length(min=</span><span class="s3">8</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">16</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">'It must also contain at least 8 characters and maximum 16'</span><span class="s1">)</span><span class="s0">,</span>
+               <span class="s1">Regexp(</span><span class="s2">&quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,20}$&quot;</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">&quot;Password must contain at least 1 uppercase, 1 lowercase, a special character and a number&quot;</span><span class="s1">)</span><span class="s0">,</span>
+               <span class="s1">EqualTo(</span><span class="s2">'password1'</span><span class="s0">,</span><span class="s1">message=</span><span class="s2">&quot;Passwords must match&quot;</span><span class="s1">)])</span>
+
+    <span class="s1">password1 = PasswordField(</span><span class="s2">&quot;Password confirmation:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">, </span><span class="s1">Length(min=</span><span class="s3">8</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">16</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">'Confirmation password must be identical to the inserted password'</span><span class="s1">)</span><span class="s0">,</span>
+               <span class="s1">Regexp(</span><span class="s2">&quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,20}$&quot;</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">&quot;Confirmation password must be identical to the inserted password&quot;</span><span class="s1">)])</span>
+
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Submit&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">class </span><span class="s1">Loginform(FlaskForm):</span>
+
+    <span class="s1">email = StringField(</span><span class="s2">&quot;Email:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">password = PasswordField(</span><span class="s2">&quot;Password:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Log-in&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">class </span><span class="s1">Bookingform(FlaskForm):</span>
+
+    <span class="s1">email = StringField(</span><span class="s2">&quot;Email:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">first_name = StringField(</span><span class="s2">&quot;First name:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">last_name = StringField(</span><span class="s2">&quot;First name:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">booking_date = DateField(</span><span class="s2">&quot;Booking date:&quot;</span><span class="s0">, </span><span class="s1">format=</span><span class="s2">&quot;%Y=%m-%d&quot;</span><span class="s1">)</span>
+
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Book!&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">class </span><span class="s1">Confirmation_code(FlaskForm):</span>
+
+    <span class="s1">inserted_code = StringField(</span><span class="s2">&quot;Please insert the code to confirm your booking. Otherwise you are able to cancel it:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Check!&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">class </span><span class="s1">recover_password_form(FlaskForm):</span>
+
+    <span class="s1">email = StringField(</span><span class="s2">&quot;Email:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Submit&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">class </span><span class="s1">code_verification_form(FlaskForm):</span>
+
+    <span class="s1">code = StringField(</span><span class="s2">&quot;Code:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()])</span>
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Submit&quot;</span><span class="s1">)</span>
+
+<span class="s0">class </span><span class="s1">changing_password(FlaskForm):</span>
+
+    <span class="s1">password = PasswordField(</span><span class="s2">&quot;New password:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">,</span>
+                                                      <span class="s1">Length(min=</span><span class="s3">8</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">16</span><span class="s0">,</span>
+                                                             <span class="s1">message=</span><span class="s2">'It must also contain at least 8 characters and maximum 16'</span><span class="s1">)</span><span class="s0">,</span>
+                                                      <span class="s1">Regexp(</span>
+                                                          <span class="s2">&quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,20}$&quot;</span><span class="s0">,</span>
+                                                          <span class="s1">message=</span><span class="s2">&quot;Password must contain at least 1 uppercase, 1 lowercase, a special character and a number&quot;</span><span class="s1">)</span><span class="s0">,</span>
+                                                      <span class="s1">EqualTo(</span><span class="s2">'password1'</span><span class="s0">, </span><span class="s1">message=</span><span class="s2">&quot;Passwords must match&quot;</span><span class="s1">)])</span>
+
+    <span class="s1">password1 = PasswordField(</span><span class="s2">&quot;Password confirmation:&quot;</span><span class="s0">, </span><span class="s1">validators=[DataRequired()</span><span class="s0">, </span><span class="s1">Length(min=</span><span class="s3">8</span><span class="s0">, </span><span class="s1">max=</span><span class="s3">16</span><span class="s0">,</span>
+                                                                                           <span class="s1">message=</span><span class="s2">'Confirmation password must be identical to the inserted password'</span><span class="s1">)</span><span class="s0">,</span>
+                                                                    <span class="s1">Regexp(</span>
+                                                                        <span class="s2">&quot;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,20}$&quot;</span><span class="s0">,</span>
+                                                                        <span class="s1">message=</span><span class="s2">&quot;Confirmation password must be identical to the inserted password&quot;</span><span class="s1">)])</span>
+
+    <span class="s1">submit = SubmitField(</span><span class="s2">&quot;Submit&quot;</span><span class="s1">)</span></pre>
+</body>
+</html>
