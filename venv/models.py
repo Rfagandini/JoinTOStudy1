@@ -16,11 +16,21 @@ class Booking(db.Model):
     email_User = db.Column(db.String(100), db.ForeignKey('user.email'))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     confirmed = db.Column(db.Boolean, default=False, nullable=False)
+    currently_active = db.Column(db.Boolean)
 
-    def __init__(self, name_StudyRoom, email_User ):
+    def __init__(self, name_StudyRoom, email_User, date):
         self.name_StudyRoom = name_StudyRoom
         self.email_User = email_User
         self.confirmed = False
+        self.date=date
+
+    def active(self):
+
+        self.currently_active = True
+
+    def not_active_anymore(self):
+
+        self.currently_active = False
 
     def not_confirmed(self):
 
@@ -60,6 +70,7 @@ class Room(db.Model):
     Phone = db.Column(db.String(30))
     Opening = db.Column(db.String(300))
     nearby_places = db.Column(db.String(2000))
+    location = db.Column(db.String(1000))
 
     def add_number_booking(self):
         self.status = self.status + 1

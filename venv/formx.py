@@ -80,3 +80,4 @@ class changing_password(FlaskForm):
                                                                         message="Confirmation password must be identical to the inserted password")])
 
     submit = SubmitField("Submit")
+

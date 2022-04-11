@@ -21,8 +21,6 @@
 
 {% for each_booking in bookings: %}
 
-
-
     {% if ((not each_booking.confirmed) and (not true_code)): %}
     <form action='/booking' method="POST">
     {% endif %}
@@ -37,6 +35,15 @@
             <td> Yes </td>
             {% else %}
             <td> No </td>
+            {% endif %}
+
+            {% if each_booking.currently_active and each_booking.confirmed %}
+
+                <form action="/deactivate_booking" method="post">
+                    <input class="btn btn-danger" type="submit" value="Leave room" style="margin: 10px">
+                    <input type="hidden" id="hidden" name="hidden" value="{{each_booking.id}}">
+                </form>
+
             {% endif %}
 
         </tr>

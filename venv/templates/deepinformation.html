@@ -61,17 +61,17 @@
         </div>
       </div>
       <div class="col-md-6" align="left" style="margin-top: 20px;">
-        <div class="h-100 p-5 bg-light border rounded-3">
+        <div class="h-80 p-5 bg-light border rounded-3">
           <h2>Description</h2>
 
-            <p class="col-md-8 fs-4">{{room.description}}</p>
+            <p class="col-md-10 fs-4">{{room.description}}</p>
 
             {% if room.status < room.capacity %}
                 {% if active %}
 
                 <form action='/booking' method="post" style="display: inline-block">
                     <input type="hidden" id="hidden" name="hidden" value="{{room.name}}">
-                    <input type="submit" class="btn btn-primary" value="Booking">
+                    <input type="submit" class="btn btn-primary" value="Book a seat">
 
                 </form>
 
@@ -81,7 +81,7 @@
                 </form>
                 {% else %}
 
-                    <p>You must have an account for further booking</p>
+                    <p>You must have an account for booking a seat</p>
                     <a href="sign_up">Create your accout in here!</a>
 
                 {%endif%}
@@ -96,7 +96,15 @@
       </div>
     </div>
 
+    <div class=" bg-light rounded-3">
+      <div class="container-fluid p-3">
+        <h1> Opening times </h1>
+          <br>
 
+          {{room.Opening}}
+
+      </div>
+    </div>
 
     <div class=" bg-light rounded-3">
       <div class="container-fluid p-3">
