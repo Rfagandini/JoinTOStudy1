@@ -7,7 +7,7 @@
 
     <div class=" bg-light rounded-3">
       <div class="container-fluid p-3" align="center">
-        <h1 class="display-5 fw-bold" style="margin-bottom: 20px;">{{ room.name.capitalize() }}({{room.status}}/{{room.capacity}}) </h1> <img src="../static/{{room.name}}_study_room1.jpg" width="800" height="auto">
+        <h1 class="display-5 fw-bold" style="margin-bottom: 20px;">{{ room.name.capitalize() }}({{room.status}}/{{room.capacity}} occupied places) </h1> <img src="../static/{{room.name}}_study_room1.jpg" width="800" height="auto">
 
       </div>
     </div>
@@ -98,7 +98,7 @@
 
     <div class=" bg-light rounded-3">
       <div class="container-fluid p-3">
-        <h1> Opening times </h1>
+        <h1> The opening hours </h1>
           <br>
 
           {{room.Opening}}
@@ -108,7 +108,7 @@
 
     <div class=" bg-light rounded-3">
       <div class="container-fluid p-3">
-        <h1> Nearby places </h1>
+        <h1> Nearby services </h1>
           <br>
           {% for i in super_text %}
           <p> {{i}} </p>

@@ -34,7 +34,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 app.config['MAIL_USERNAME'] = "BookTOStudy@mail.com"
-app.config['MAIL_PASSWORD'] =  os.getenv('password')
+app.config['MAIL_PASSWORD'] = os.getenv('password')
 app.config['MAIL_TLS'] = True
 app.config['MAIL_SERVER'] = 'smtp.mail.com'
 app.config['MAIL_PORT'] = 587
@@ -84,6 +84,25 @@ def create_db():
 
         description_murazzi = 'This study room is located in the city centre, in front of River Po, in the so-called "Murazzi del Po". It is a very quiet place to study, next to Piazza Vittorio Veneto. It is attended by university students coming from different departments since it is well connected and easily reachable by the city transport service. Next to it, it is possible to find any type of bars to drink cocktails in front of river Po. In some of them, there is also an aperitif service.'
 
+        description_castelfidardo = "Two different study rooms placed in Corso Castelfidardo, part of the Politecnico di Torino, located in the first and second floor of the building. These study rooms are available only if booked by"\
+                                    "PoliTo students, due to the nowadays pandemic. Each student can book these study rooms and study also"\
+                                    "during the lecture breaks, since they"\
+                                    "are located in the same university building. They offer a quiet place to"\
+                                    "study, large seats and sockets available for each place. If you want to take a break, you can take a coffee to"\
+                                    'different bars present in Politecnico or have lunch at the Mensa "Universitaria Castelfidardo".'
+
+        description_aula_studio_1 = "Placed in the main headquarter of Politecnico di Torino, this study room is available only if booked by PoliTo students only. It is also called 'aula studio rumorosa' since here you can find a lot of students that study for project work, and so they need a place where they are able to discuss. It's the right place to study with friends. In the same building, you can find the CLUT library, for books and office suppliers, the Copysprinter, copy shop and a place to find notes written by colleagues, and different bars placed in Politecnico. Inside the university, it is also possible to find a university library to borrow books."
+
+        nearby_places_aula_studio_1 = "La cafeteria (https://goo.gl/maps/ktHw8ZP2r3C6nRPv9)"\
+                                        "Bar Denise (https://goo.gl/maps/cnSu2Ek7fgZjXqiu6)"\
+                                        "Bar Tropical (https://g.page/BAR-Tropical-Torino?share)"\
+                                        "Nelida bistrot (https://goo.gl/maps/qjBCXvWtoD1L7crx9)"\
+                                        "Mensa Universitaria Castelfidardo (https://goo.gl/maps/cisit67UxPACJX3u5)"\
+                                        "Bar Fulwer Design (https://g.page/FulwerDesignBar?share)"\
+                                        "CLUT (https://goo.gl/maps/mmf2SoyTrayPEAEEA)"\
+                                        "Levrotto & Bella Libreria Editrice Universitaria (https://goo.gl/maps/7wavbGYrGvtHSp2p9)"\
+                                        "Copysprinter Politecnico (https://goo.gl/maps/TfonXP7tXMst3S4q6)"\
+                                        "Epic s.a.s. centro appunti (https://goo.gl/maps/TnEk3DhhiDkusuLj8)."
 
         nearby_places_opera = "Carrefour Market (supermarket) (https://goo.gl/maps/Hiu3VHyrbfWJWfZQ9) Ins market (https://goo.gl/maps/oJzq3dx8mh96kEWX7Favuri') Quality Pizza & Street Food (https://goo.gl/maps/f6P2G1LMRFz1qNzo6) Panfe' (https://goo.gl/maps/WH7FTHXS9n6kVMpa8) Gelateria la Romana (dessert and ice creams) (https://goo.gl/maps/BUvn1vcmUbAVLSZB9) La vie en rose (https://goo.gl/maps/hsoPb49J8z5bhRr16) Caffe' degli atenei (https://g.page/caffedegliatenei?share) Copysprinter Giuria (https://g.page/copysprintergiuria?share) Copisteria & Eliografia dello Studente (https://g.page/copisteriadellostudente?share) Copirema (https://g.page/copirema?share)"
 
@@ -142,6 +161,16 @@ def create_db():
                                 "Caffe 95 (https://goo.gl/maps/tBjAip28buaWqwAs5)"\
                                 "La birroteca (https://goo.gl/maps/qQUf6UqmsKf7kfSX7)"
 
+        nearby_places_castelfidardo = "Mensa Universitaria Castelfidardo (https://goo.gl/maps/cisit67UxPACJX3u5)"\
+                                    "Paninoteca Fuoricorso (https://g.page/paninotecafuoricorsotorino?share)"\
+                                    "Paninoteca 30 e lode (https://goo.gl/maps/RPEkUR7WWZZ87L3w7)"\
+                                    "Arki cafe (https://goo.gl/maps/XJWmrsPE9KDimiwU6)"\
+                                    "Aldo's bakery (https://goo.gl/maps/nXY1cM3aQkFAZrZBA)"\
+                                    "MixTo (https://goo.gl/maps/AKf8sgLzFUD5eJps8)"\
+                                    "Plottergrafica Centro Stampa (https://g.page/Plottergrafica?share)"\
+                                    "Copy Break (https://g.page/copisteria_boggio?share)"\
+                                    "Copysprinter Politecnico (https://goo.gl/maps/TfonXP7tXMst3S4q6)"
+
 
 
         aula_verdi = Room(name="verdi", capacity=143, description=description_verdi, confirmation_code="#$%303", status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes", heating_system="Yes", address="via Verdi, 26 - 10124 Torino", copy_machine="Yes", text_borrowing="No", Smartcard_services="Yes", Phone="+39 011 6531290", Opening="Monday-Friday: 8:30 AM to 00:00 AM. On public holidays, Sundays and Saturdays from 8:30 AM to 10:00 PM"
@@ -171,11 +200,11 @@ def create_db():
                           nearby_places=nearby_places_castello,
                           location="https://www.google.com/maps/place/Viale+Mattioli,+39,+10125+Torino+TO/@45.0542606,7.6831836,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d5ca7afffff:0x25e79696504e9779!8m2!3d45.0542568!4d7.6853723")
 
-        aula_grugliasco = Room(name="grugliasco", capacity=150, description=description_grugliasco, confirmation_code="609TOR", status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes", heating_system="No", address="Via Berta, 5, 10095 Grugliasco TO")
+        # aula_grugliasco = Room(name="grugliasco", capacity=150, description=description_grugliasco, confirmation_code="609TOR", status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes", heating_system="No", address="Via Berta, 5, 10095 Grugliasco TO")
 
-        aula_sansalvario = Room(name="sansalvario", capacity=200, description=description_sansalvario, confirmation_code="3TBOP4", status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="No", heating_system="No", address="Via Pietro Giuria, 17, 10126 Torino TO")
+        # aula_sansalvario = Room(name="sansalvario", capacity=200, description=description_sansalvario, confirmation_code="3TBOP4", status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="No", heating_system="No", address="Via Pietro Giuria, 17, 10126 Torino TO")
 
-        aula_test = Room(name="marcopolo", capacity=2, description=description_marcopolo, confirmation_code="123456", status=0, internet="Yes", socket="No", bathroom="No", vending_machine="Yes", ac="No", heating_system="Yes", address="Via Marco polo, 39, 10129 Torino TO")
+        # aula_test = Room(name="marcopolo", capacity=2, description=description_marcopolo, confirmation_code="123456", status=0, internet="Yes", socket="No", bathroom="No", vending_machine="Yes", ac="No", heating_system="Yes", address="Via Marco polo, 39, 10129 Torino TO")
 
         aula_murazzi = Room(name="Murazzi", capacity=81, description=description_murazzi, confirmation_code="123098",
                           status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="Yes",
@@ -188,10 +217,24 @@ def create_db():
                           status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="No",
                           heating_system="Yes", address="corso Ferrucci, 65 - 10138 Torino ", copy_machine="No",
                           text_borrowing="No", Smartcard_services="No", Phone="",
-                          Opening="Monday-Sunday: 8:00 AM to 00:00 AM. ", nearby_places=nearby_places_murazzi,
-                          location="")
+                          Opening="Monday-Sunday: 8:00 AM to 00:00 AM. ", nearby_places=nearby_places_comala,
+                          location="https://www.google.com/maps/place/Comala+Cultural+Association/@45.0694231,7.6548624,18z/data=!3m1!4b1!4m5!3m4!1s0x47886d1d0e28c6e7:0x64a673dbb09c60a4!8m2!3d45.0694218!4d7.6556362")
 
-        db.session.add_all([aula_verdi, aula_grugliasco, aula_sansalvario, aula_test, aula_opera, aula_galliari, aula_castello, aula_murazzi, aula_comala])
+        aula_castelfidardo = Room(name="Castelfidardo", capacity=110, description=description_castelfidardo, confirmation_code="AXE303",
+                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
+                          heating_system="Yes", address="corso Ferrucci, 65 - 10138 Torino ", copy_machine="No",
+                          text_borrowing="No", Smartcard_services="No", Phone="+39 011 5646106",
+                          Opening="Monday-Friday: 8:30 AM to 19:00 PM. On public holidays, sundays and saturdays it is closed", nearby_places=nearby_places_castelfidardo,
+                          location="https://www.google.com/maps/place/Polit%C3%A9cnico+de+Tur%C3%ADn/@45.0638292,7.6602771,17.5z/data=!4m12!1m6!3m5!1s0x47886d193f18a9f1:0xc4839badaa7c36b2!2sEDISU+-+Study+Room+Castelfidardo!8m2!3d45.0648217!4d7.65912!3m4!1s0x47886d196d531be1:0x5dbe7da5b1494e4d!8m2!3d45.0632841!4d7.6601247")
+
+        aula_studio_1 = Room(name="Study_room1", capacity=128, description=description_aula_studio_1, confirmation_code="AXE373",
+                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
+                          heating_system="Yes", address="corso Duca degli Abbruzzi, 24 - 10138 Torino", copy_machine="No",
+                          text_borrowing="No", Smartcard_services="No", Phone="+39 011 5646106",
+                          Opening="Monday-Friday: 8:30 AM to 19:00 PM. On public holidays, sundays and saturdays it is closed", nearby_places=nearby_places_aula_studio_1,
+                          location="https://www.google.com/maps/place/Politecnico+di+Torino/@45.0638292,7.6602771,17.5z/data=!4m12!1m6!3m5!1s0x47886d193f18a9f1:0xc4839badaa7c36b2!2sEDISU+-+Study+Room+Castelfidardo!8m2!3d45.0648217!4d7.65912!3m4!1s0x478620b85cabc337:0xd97006264fbdaf1b!8m2!3d45.062404!4d7.6623718")
+
+        db.session.add_all([aula_verdi, aula_opera, aula_galliari, aula_castello, aula_murazzi, aula_comala, aula_castelfidardo, aula_studio_1])
         db.session.commit()
 
         S = 6
@@ -248,26 +291,111 @@ def mail_recover(to, subject, template, **kwargs):
     msg.html = render_template(template+ '.html', **kwargs)
     mail.send(msg)
 
+
 def get_last_booking(email):
     bookings = Booking.query.filter_by(email_User=email).all()
     last_booking = bookings[-1]
     return last_booking
 
+
 def get_bookings(email):
     bookings = Booking.query.filter_by(email_User=email).all()
     return bookings
 
+
 def get_room(room_name):
     room = Room.query.filter_by(name=room_name).first()
     return room
+
 
 def get_booking(id):
     booking_ = Booking.query.filter_by(id=id).first()
     return booking_
 
 
+def getUser(email):
+    check_expirancy()
+
+    user = User.query.filter_by(email=email).first()
+    return user
+
+
+def check_email(email):
+    check_expirancy()
+    existent_user = getUser(email)
+    if existent_user:
+        return True
+    else:
+        return False
+
+
+def check_password(inserted_password, stored_password):
+    check_expirancy()
+
+    if bcrypt.checkpw(inserted_password.encode('utf-8'), stored_password.encode('utf-8')):
+        return True
+    else:
+        return False
+
+
+def enter_code(code, room_name):
+
+
+    room = get_room(room_name)
+    room_code = room.confirmation_code
+
+    if room_code == code:
+        return True
+    else:
+        return False
+
+def get_all_bookings():
+
+    today_date = date.today()
+    all_existent_bookings = Booking.query.filter(func.date(Booking.date)==today_date).all()
+    return all_existent_bookings
+
+
+def check_expirancy():
+
+    date_now = datetime.datetime.today()
+
+    for booking in get_all_bookings():
+
+        if not booking.confirmed:
+
+            room = get_room(booking.name_StudyRoom)
+            delta = date_now - booking.date
+            delta_minutes = delta.total_seconds()/60
+
+            print(date_now)
+            print(booking.date)
+            print(delta_minutes)
+
+            if delta_minutes >= 1:
+
+                room.decrease_number_booking()
+                db.session.delete(booking)
+                db.session.commit()
+                print("Successfully deleted booking")
+
+
+def new_user(email, first_name, last_name, password):
+    check_expirancy()
+
+    session["active_user"] = email
+    session["active_user_name"] = first_name
+    hashed_password = bcrypt.hashpw((password.encode('utf-8')), bcrypt.gensalt())
+    hashed_password = hashed_password.decode('utf-8')
+    new_user = User(email=email, first_name=first_name, last_name=last_name, password=hashed_password)
+    new_user.counter_booking = 0
+    db.session.add(new_user)
+    db.session.commit()
+
+
 @app.route('/deactivate_booking', methods=['GET', 'POST'])
 def deactivate_booking():
+    check_expirancy()
 
     if request.method == "POST":
 
@@ -288,45 +416,10 @@ def deactivate_booking():
         return redirect("/home")
 
 
-def enter_code(code, room_name):
-
-    room = get_room(room_name)
-    room_code = room.confirmation_code
-
-    if room_code == code:
-        return True
-    else:
-        return False
-
-def get_all_bookings():
-    today_date = date.today()
-    all_existent_bookings = Booking.query.filter(func.date(Booking.date)==today_date).all()
-    return all_existent_bookings
-
-def check_expirancy():
-
-    date_now = datetime.datetime.today()
-
-    for booking in get_all_bookings():
-
-        delta = date_now - booking.date
-        delta_minutes = delta.total_seconds()/60
-
-        print(date_now)
-        print(booking.date)
-        print(delta_minutes)
-
-        if delta_minutes >= 30:
-            print("wow, this is super expired")
-            return True
-        else:
-            print("the fruit has not matured yet")
-            return False
-
-
 @app.route('/booking', methods=['GET', 'POST'])
 def booking():
 
+    check_expirancy()
     page_name = "Booking"
     room_name = session.get('room_name')
     true_code = False
@@ -389,7 +482,7 @@ def booking():
                         else:
 
                             true_code = False
-                            new_booking = Booking(name_StudyRoom=room_name, email_User=user.email)
+                            new_booking = Booking(name_StudyRoom=room_name, email_User=user.email, date=datetime.datetime.today())
                             new_booking.not_confirmed()
                             new_booking.active()
                             db.session.add(new_booking)
@@ -411,6 +504,7 @@ def booking():
 
                 new_booking = Booking(name_StudyRoom=room_name, email_User=user.email, date=datetime.datetime.today())
                 new_booking.not_confirmed()
+                new_booking.active()
                 db.session.add(new_booking)
                 booked_room = get_room(room_name)
                 booked_room.add_number_booking()
@@ -453,6 +547,7 @@ def left(message):
 
 @app.route('/information', methods=['GET', 'POST'])
 def information():
+    check_expirancy()
 
     rooms = Room.query.all()
 
@@ -464,24 +559,93 @@ def information():
     return render_template("information.html", active=active, rooms=rooms)
 
 
-@app.route('/marcopolo', methods=['GET','POST'])
-def marcopolo():
+# @app.route('/marcopolo', methods=['GET','POST'])
+# def marcopolo():
+#     check_expirancy()
+#
+#     if session.get('active_user'):
+#         active = True
+#     else:
+#         active = False
+#
+#     name = 'marcopolo'
+#     room = get_room(name)
+#     room_name = room.name
+#     session["room_name"] = room_name
+#
+#     return render_template("deepinformation.html", active=active, room=room)
 
+@app.route('/Castelfidardo', methods=['GET','POST'])
+def Castelfidardo():
+    check_expirancy()
     if session.get('active_user'):
         active = True
     else:
         active = False
 
-    name = 'marcopolo'
+    name = 'Castelfidardo'
+
     room = get_room(name)
+
+    text_nearby = ""
+    super_text = []
+
+    for i in room.nearby_places:
+
+        if i == ")":
+            text_nearby += i
+            super_text.append(text_nearby)
+            text_nearby = ""
+
+        else:
+            text_nearby += i
+
     room_name = room.name
     session["room_name"] = room_name
 
-    return render_template("deepinformation.html", active=active, room=room)
+    return render_template("deepinformation.html", active=active, room=room, super_text=super_text)
+
+
+@app.route('/Study_room1', methods=['GET','POST'])
+def Study_room1():
+    check_expirancy()
+    if session.get('active_user'):
+        active = True
+    else:
+        active = False
+
+    name = 'Study_room1'
+
+    room = get_room(name)
+
+    text_nearby = ""
+    super_text = []
+
+    for i in room.nearby_places:
+
+        if i == ")":
+            text_nearby += i
+            super_text.append(text_nearby)
+            text_nearby = ""
+
+        else:
+            text_nearby += i
+
+    room_name = room.name
+    session["room_name"] = room_name
+
+    return render_template("deepinformation.html", active=active, room=room, super_text=super_text)
+
+@app.route('/contact_us', methods=['GET', 'POST'])
+def contact_us():
+    return 0;
+
 
 
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
+
+    check_expirancy()
     # / < roomname >
 
     room = request.form["hidden"]
@@ -493,6 +657,7 @@ def chat():
 @app.route('/personal', methods=['GET', 'POST'])
 def personal():
 
+    check_expirancy()
     user = getUser(session.get('active_user'))
 
     bookings = Booking.query.filter_by(email_User=user.email).all()
@@ -502,6 +667,7 @@ def personal():
 
 @app.route('/bookings_list', methods=['GET', 'POST'])
 def bookings_list():
+    check_expirancy()
 
     form = Confirmation_code()
 
@@ -514,7 +680,7 @@ def bookings_list():
 
 @app.route('/verdi', methods=['GET', 'POST'])
 def verdi():
-
+    check_expirancy()
     if session.get('active_user'):
         active = True
     else:
@@ -542,9 +708,10 @@ def verdi():
 
     return render_template("deepinformation.html", active=active, room=room, super_text=super_text)
 
+
 @app.route('/Murazzi', methods=['GET', 'POST'])
 def Murazzi():
-
+    check_expirancy()
     if session.get('active_user'):
         active = True
     else:
@@ -572,8 +739,10 @@ def Murazzi():
 
     return render_template("deepinformation.html", active=active, room=room, super_text=super_text)
 
+
 @app.route('/Castello', methods=['GET', 'POST'])
 def Castello():
+    check_expirancy()
 
     if session.get('active_user'):
         active = True
@@ -605,6 +774,7 @@ def Castello():
 
 @app.route('/Opera', methods=['GET', 'POST'])
 def Opera():
+    check_expirancy()
 
     if session.get('active_user'):
         active = True
@@ -636,6 +806,7 @@ def Opera():
 
 @app.route('/Galliari', methods=['GET', 'POST'])
 def Galliari():
+    check_expirancy()
 
     if session.get('active_user'):
         active = True
@@ -666,6 +837,7 @@ def Galliari():
 
 @app.route('/Comala', methods=['GET', 'POST'])
 def Comala():
+    check_expirancy()
 
     if session.get('active_user'):
         active = True
@@ -697,6 +869,7 @@ def Comala():
 
 @app.route('/grugliasco', methods=['GET', 'POST'])
 def grugliasco():
+    check_expirancy()
 
     if session.get('active_user'):
         active = True
@@ -713,6 +886,7 @@ def grugliasco():
 
 @app.route('/sansalvario', methods=['GET', 'POST'])
 def sansalvario():
+    check_expirancy()
 
     if session.get('active_user'):
         active = True
@@ -737,6 +911,7 @@ def home():
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
+    check_expirancy()
     session["active_user"] = None
     session["active_user_name"] = None
     return redirect(url_for('home'))
@@ -744,6 +919,7 @@ def logout():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    check_expirancy()
 
     if session.get("active_user"):
 
@@ -777,36 +953,9 @@ def login():
     return render_template("login.html", form=form, page_name=page_name)
 
 
-def check_email(email):
-    existent_user = getUser(email)
-    if existent_user:
-        return True
-    else:
-        return False
-
-
-def check_password(inserted_password, stored_password):
-
-    if bcrypt.checkpw(inserted_password.encode('utf-8'), stored_password.encode('utf-8')):
-        return True
-    else:
-        return False
-
-
-def new_user(email, first_name, last_name, password):
-
-    session["active_user"] = email
-    session["active_user_name"] = first_name
-    hashed_password = bcrypt.hashpw((password.encode('utf-8')), bcrypt.gensalt())
-    hashed_password = hashed_password.decode('utf-8')
-    new_user = User(email=email, first_name=first_name, last_name=last_name, password=hashed_password)
-    new_user.counter_booking = 0
-    db.session.add(new_user)
-    db.session.commit()
-
-
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
+    check_expirancy()
     page_name = "Sign-up"
     form = Registrationform()
 
@@ -826,7 +975,7 @@ def sign_up():
         else:
 
             new_user(email=email, first_name=first_name, last_name=last_name, password=password)
-            send_mail_register(email, "Registration in BookTOStudy!", "mail", name=first_name)
+            send_mail_register(email, "Registration in JoinTOStudy!", "mail", name=first_name)
 
             return redirect(url_for("home"))
     else:
@@ -838,6 +987,7 @@ def sign_up():
 
 @app.route('/recover_password', methods=['GET', 'POST'])
 def recover_password():
+    check_expirancy()
 
     page_name = "Recovery password process"
     form = recover_password_form()
@@ -884,13 +1034,9 @@ def recover_password():
     return render_template("recover_password.html", form=form, page_name=page_name)
 
 
-
-
-
-
-
 @app.route('/confirmation_code', methods=['GET','POST'])
 def confirmation_code():
+    check_expirancy()
 
     page_name = "Recovery password process"
     form = code_verification_form()
@@ -920,8 +1066,11 @@ def confirmation_code():
 
 @app.route('/password_change_page', methods=['GET', 'POST'])
 def password_change_page():
-
-    user = getUser(session.get('email_password_recovery'))
+    check_expirancy()
+    if session.get('active_user'):
+        user = getUser(session.get('active_user'))
+    else:
+        user = getUser(session.get('email_password_recovery'))
     name_page = "New password form"
     form = changing_password()
     done = False
@@ -947,15 +1096,9 @@ def password_change_page():
         return render_template("password_change_page.html", form=form, name_page = name_page, done=done )
 
 
-def getUser(email):
-
-    user = User.query.filter_by(email=email).first()
-    return user
-
-
-
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete_booking(id):
+    check_expirancy()
 
     print("The booking id is: ")
     print(id)

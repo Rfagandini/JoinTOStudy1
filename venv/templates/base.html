@@ -21,7 +21,7 @@
 
     </head>
 
-    <body>
+    <body style="font-family: 'Trebuchet MS','Verdana'; font-size: 1.1rem;">
 
         <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#524E4D; ">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
@@ -30,17 +30,17 @@
              <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
 
-                    <img src="../static/logo%20part1.png" width="3%">
+                    <img src="../static/logo%20part1.png" width="2.5%">
                     <a class="nav-item nav-link" id="home" href="/" style="color: whitesmoke;">Home</a>
                     <a class="nav-item nav-link" id="information" href="/information" style="color: whitesmoke;">Information</a>
 
                 {% if session.get("active_user"): %}
 
-                      <a class="nav-item nav-link" id="logout" href="/logout" style="color: whitesmoke;">Logout</a>
-
-                      <a class="nav-item nav-link" id="personal" href="/personal" style="color: whitesmoke;">Account</a>
+                      <a class="nav-item nav-link" id="personal" href="/personal" style="color: whitesmoke;">My account</a>
                       <a class="nav-item nav-link" id="bookings" href="/bookings_list" style="color: whitesmoke;"> Bookings </a>
-                      <span style="color: white; text-align: left;   margin-top: 0.5rem; margin-left: 60%">You are logged in, {{ session.get("active_user_name") }}</span>
+
+                      <span style="color: yellow;  margin-left: 0.5em;  margin-top: 0.5rem;">You are logged in, {{ session.get("active_user_name") }}</span>
+                    <a class="nav-item nav-link ml-auto" id="logout" href="/logout" style="color: whitesmoke; margin-right: -15%; font-size: 1.3rem;">Logout</a>
 
                 {% elif not session.get("active_user"): %}
 
@@ -89,10 +89,10 @@
         </div>
 
 
-        <footer style="position: fixed; bottom: 0; left: 0; right: 0; background:#524E4D; height: 9em; width: 100%; padding-top: 15px;  color: #fff; margin-top: 1em;" >
+        <footer style="position: fixed; bottom: 0; left: 0; right: 0; background:#524E4D; height: 7.5em; width: 100%; padding-top: 15px;  color: #fff; margin-top: 1em;" >
             <div class="footer-content" style="display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center">
 <!--                 <image href="../static/logo-orizzontale.png"></image>-->
-                <img src="../static/logo--orizzontale.png" width="17%">
+                <img src="../static/logo--orizzontale.png" width="15%">
                 <ul class="socials" style="list-style: none; display: flex; align-items: center; justify-content: center; margin: 0.5rem 0 3rem 0;">
                     <li style="margin: 0 10px;"><a style="text-decoration: none; color: white" href="#"><i style="font-size: 1.1rem;" class="fa fa-facebook"></i></a> </li>
                     <li style="margin: 0 10px;"><a style="text-decoration: none; color: white" href="#"><i style="font-size: 1.1rem;" class="fa fa-instagram"></i></a> </li>

@@ -21,12 +21,13 @@
                  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#55595c"></rect>
-              <a href="{{room.location}}"><image href="../static/{{room.name}}mapsss.png" alt="{{room.name}} study room picture"></image></a>
+              <a href="{{room.location}}"><image href="../static/{{room.name}}maps1.png" alt="{{room.name}} study room picture"></image></a>
              <text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
             </svg>
             <h3 align="center">{{ room.name.capitalize() }} ({{room.status}}/{{room.capacity}})</h3>
             <div class="card-body">
-              <p class="card-text"> {{room.address}} </p>
+              <p class="card-text">Address: {{room.address.capitalize()}} </p>
+                <span>Contact: {{room.Phone}}</span>
 <!--                <span> {{room.Opening}} </span>-->
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
