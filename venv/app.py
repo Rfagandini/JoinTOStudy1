@@ -35,6 +35,7 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 app.config['MAIL_USERNAME'] = "BookTOStudy@mail.com"
 app.config['MAIL_PASSWORD'] = os.getenv('password')
+# app.config['MAIL_PASSWORD'] = "mail0480*"
 app.config['MAIL_TLS'] = True
 app.config['MAIL_SERVER'] = 'smtp.mail.com'
 app.config['MAIL_PORT'] = 587
@@ -173,11 +174,11 @@ def create_db():
 
 
 
-        aula_verdi = Room(name="verdi", capacity=143, description=description_verdi, confirmation_code="#$%303", status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes", heating_system="Yes", address="via Verdi, 26 - 10124 Torino", copy_machine="Yes", text_borrowing="No", Smartcard_services="Yes", Phone="+39 011 6531290", Opening="Monday-Friday: 8:30 AM to 00:00 AM. On public holidays, Sundays and Saturdays from 8:30 AM to 10:00 PM"
+        aula_verdi = Room(name="verdi", capacity=143, description=description_verdi, confirmation_code="#$%303", status=140, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes", heating_system="Yes", address="via Verdi, 26 - 10124 Torino", copy_machine="Yes", text_borrowing="No", Smartcard_services="Yes", Phone="+39 011 6531290", Opening="Monday-Friday: 8:30 AM to 00:00 AM. On public holidays, Sundays and Saturdays from 8:30 AM to 10:00 PM"
                           , nearby_places=nearby_places_verdi, location="https://www.google.com/maps/place/Via+Giuseppe+Verdi,+26,+10124+Torino+TO/@45.0673271,7.6928687,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d62e84b7e0f:0x3acc507af920dd65!8m2!3d45.0673271!4d7.6950574")
 
         aula_galliari = Room(name="Galliari", capacity=134, description=description_galliari, confirmation_code="098765",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
+                          status=63, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
                           heating_system="Yes", address="via Ormea 11 Bis/E-10125 Torino", copy_machine="Yes",
                           text_borrowing="No", Smartcard_services="No", Phone="+39 011 6531291",
                           Opening="Monday-Friday: 9:00 AM to 22:00 PM. On public holidays, Sundays and Saturdays closed"
@@ -185,14 +186,14 @@ def create_db():
                           location="https://www.google.com/maps/place/Aula+Studio+Galliari/@45.0582907,7.6806791,16z/data=!4m9!1m2!2m1!1saula+studio+galliari+torino!3m5!1s0x47886d95c4f3c9e9:0x27e7c3f8054e41e3!8m2!3d45.0582886!4d7.6850623!15sChthdWxhIHN0dWRpbyBnYWxsaWFyaSB0b3Jpbm-SARJ1bml2ZXJzaXR5X2xpYnJhcnk")
 
         aula_opera = Room(name="Opera", capacity=184, description=description_opera, confirmation_code=")(*765",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
+                          status=179, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
                           heating_system="Yes", address="via Michelangelo Buonarroti, 17 bis-10126 Torino", copy_machine = "Yes",
                           text_borrowing="No", Smartcard_services="No", Phone="+39 0116531054",
                           Opening="Monday-Friday: 8:30 AM to 00:00 AM. On public holidays, Sundays and Saturdays from 8:30 AM to 10:00 PM", nearby_places=nearby_places_opera,
                           location="https://www.google.com/maps/place/Sala+Studio+Edisu+%22Opera%22/@45.0507869,7.6761632,17z/data=!3m1!4b1!4m5!3m4!1s0x47886d4589ff0761:0xd861e3118719bf6c!8m2!3d45.0507908!4d7.6783573")
 
         aula_castello = Room(name="Castello", capacity=198, description=description_opera, confirmation_code="000111",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="Yes",
+                          status=129, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="Yes",
                           heating_system="Yes", address="Viale Mattioli, 39 - 10125 Torino TO ",
                           copy_machine="No",
                           text_borrowing="No", Smartcard_services="No", Phone="+39 011 0906655",
@@ -207,28 +208,28 @@ def create_db():
         # aula_test = Room(name="marcopolo", capacity=2, description=description_marcopolo, confirmation_code="123456", status=0, internet="Yes", socket="No", bathroom="No", vending_machine="Yes", ac="No", heating_system="Yes", address="Via Marco polo, 39, 10129 Torino TO")
 
         aula_murazzi = Room(name="Murazzi", capacity=81, description=description_murazzi, confirmation_code="123098",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="Yes",
+                          status=41, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="Yes",
                           heating_system="Yes", address="Murazzi del Po Gipo Farassino, 22, 10124 Torino TO", copy_machine="No",
                           text_borrowing="No", Smartcard_services="No", Phone="+39 22883024",
                           Opening="Monday-Friday: 9:00 AM to 20:00 PM. On public holidays, Sundays and Saturdays it is closed", nearby_places=nearby_places_murazzi,
                           location="https://www.google.com/maps/place/Murazzi+Student+Zone/@45.0661899,7.6946359,17z/data=!4m9!1m2!2m1!1saula+studio+murazzi+phone+number!3m5!1s0x47886da7642cb87b:0x2f7aaa7fbf430ad0!8m2!3d45.0654144!4d7.6985917!15sCiBhdWxhIHN0dWRpbyBtdXJhenppIHBob25lIG51bWJlciICEAFaFSITYXVsYSBzdHVkaW8gbXVyYXp6aZIBDGVzcHJlc3NvX2JhcpoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSdE1uUnBSazkzRUFF")
 
         aula_comala = Room(name="Comala", capacity=500, description=description_comala, confirmation_code="102934",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="No",
+                          status=490, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="No", ac="No",
                           heating_system="Yes", address="corso Ferrucci, 65 - 10138 Torino ", copy_machine="No",
                           text_borrowing="No", Smartcard_services="No", Phone="",
                           Opening="Monday-Sunday: 8:00 AM to 00:00 AM. ", nearby_places=nearby_places_comala,
                           location="https://www.google.com/maps/place/Comala+Cultural+Association/@45.0694231,7.6548624,18z/data=!3m1!4b1!4m5!3m4!1s0x47886d1d0e28c6e7:0x64a673dbb09c60a4!8m2!3d45.0694218!4d7.6556362")
 
         aula_castelfidardo = Room(name="Castelfidardo", capacity=110, description=description_castelfidardo, confirmation_code="AXE303",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
+                          status=95, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
                           heating_system="Yes", address="corso Ferrucci, 65 - 10138 Torino ", copy_machine="No",
                           text_borrowing="No", Smartcard_services="No", Phone="+39 011 5646106",
                           Opening="Monday-Friday: 8:30 AM to 19:00 PM. On public holidays, sundays and saturdays it is closed", nearby_places=nearby_places_castelfidardo,
                           location="https://www.google.com/maps/place/Polit%C3%A9cnico+de+Tur%C3%ADn/@45.0638292,7.6602771,17.5z/data=!4m12!1m6!3m5!1s0x47886d193f18a9f1:0xc4839badaa7c36b2!2sEDISU+-+Study+Room+Castelfidardo!8m2!3d45.0648217!4d7.65912!3m4!1s0x47886d196d531be1:0x5dbe7da5b1494e4d!8m2!3d45.0632841!4d7.6601247")
 
         aula_studio_1 = Room(name="Study_room1", capacity=128, description=description_aula_studio_1, confirmation_code="AXE373",
-                          status=0, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
+                          status=123, internet="Yes", socket="Yes", bathroom="Yes", vending_machine="Yes", ac="Yes",
                           heating_system="Yes", address="corso Duca degli Abbruzzi, 24 - 10138 Torino", copy_machine="No",
                           text_borrowing="No", Smartcard_services="No", Phone="+39 011 5646106",
                           Opening="Monday-Friday: 8:30 AM to 19:00 PM. On public holidays, sundays and saturdays it is closed", nearby_places=nearby_places_aula_studio_1,
@@ -358,7 +359,7 @@ def get_all_bookings():
 
 def check_expirancy():
 
-    date_now = datetime.datetime.today()
+    date_now = datetime.datetime.today().replace(microsecond=0)
 
     for booking in get_all_bookings():
 
@@ -372,7 +373,7 @@ def check_expirancy():
             print(booking.date)
             print(delta_minutes)
 
-            if delta_minutes >= 1:
+            if delta_minutes >= 30:
 
                 room.decrease_number_booking()
                 db.session.delete(booking)
@@ -482,7 +483,7 @@ def booking():
                         else:
 
                             true_code = False
-                            new_booking = Booking(name_StudyRoom=room_name, email_User=user.email, date=datetime.datetime.today())
+                            new_booking = Booking(name_StudyRoom=room_name, email_User=user.email, date=datetime.datetime.today().replace(microsecond=0))
                             new_booking.not_confirmed()
                             new_booking.active()
                             db.session.add(new_booking)
@@ -502,7 +503,7 @@ def booking():
 
             else:
 
-                new_booking = Booking(name_StudyRoom=room_name, email_User=user.email, date=datetime.datetime.today())
+                new_booking = Booking(name_StudyRoom=room_name, email_User=user.email, date=datetime.datetime.today().replace(microsecond=0))
                 new_booking.not_confirmed()
                 new_booking.active()
                 db.session.add(new_booking)
@@ -559,21 +560,21 @@ def information():
     return render_template("information.html", active=active, rooms=rooms)
 
 
-# @app.route('/marcopolo', methods=['GET','POST'])
-# def marcopolo():
-#     check_expirancy()
-#
-#     if session.get('active_user'):
-#         active = True
-#     else:
-#         active = False
-#
-#     name = 'marcopolo'
-#     room = get_room(name)
-#     room_name = room.name
-#     session["room_name"] = room_name
-#
-#     return render_template("deepinformation.html", active=active, room=room)
+@app.route('/marcopolo', methods=['GET','POST'])
+def marcopolo():
+    check_expirancy()
+
+    if session.get('active_user'):
+        active = True
+    else:
+        active = False
+
+    name = 'marcopolo'
+    room = get_room(name)
+    room_name = room.name
+    session["room_name"] = room_name
+
+    return render_template("deepinformation.html", active=active, room=room)
 
 @app.route('/Castelfidardo', methods=['GET','POST'])
 def Castelfidardo():
@@ -1131,4 +1132,4 @@ def delete_booking(id):
 
 if __name__ == '__main__':
     # app.run()
-    socketio.run(app, host="192.168.1.57")
+    socketio.run(app, host="172.22.17.97")
